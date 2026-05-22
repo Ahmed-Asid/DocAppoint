@@ -23,7 +23,7 @@ const SignUp = () => {
             email: email,
             password: password,
             image: image,
-            callbackURL: "/sign-in",
+            callbackURL: "/login",
         })
 
         if (error) {
@@ -32,7 +32,7 @@ const SignUp = () => {
 
         if (res) {
             toast.success('Sign up successful');
-            redirect('/sign-in')
+            redirect('/login')
         }
     }
 
