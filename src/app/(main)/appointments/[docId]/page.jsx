@@ -11,6 +11,7 @@ import {
 import { getDocByID } from "@/data/data";
 import { Button, Card, Modal } from "@heroui/react";
 import { BookAppointment } from "./BookAppointment";
+import { bookAppointment } from "@/lib/actions";
 
 const DoctorDetailsPage = async ({ params }) => {
 
@@ -75,7 +76,7 @@ const DoctorDetailsPage = async ({ params }) => {
                             <div className="mx-auto md:mx-0">
                                 <Modal>
                                     <Button variant="secondary">Book Appointment</Button>
-                                    <BookAppointment docName={doc.name} availability={doc.availability}></BookAppointment>
+                                    <BookAppointment docName={doc.name} availability={doc.availability} formAction={bookAppointment}></BookAppointment>
                                 </Modal>
                             </div>
 

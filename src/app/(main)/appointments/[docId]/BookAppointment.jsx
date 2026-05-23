@@ -4,20 +4,13 @@ import { Stethoscope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useState } from "react";
 
-export function BookAppointment({ docName, availability }) {
+export function BookAppointment({ docName, availability, formAction }) {
 
     const todayStr = new Date().toISOString().split("T")[0];
 
     const [bookingDate, setBookingDate] = useState("");
     const [selectedSlot, setSelectedSlot] = useState("");
 
-
-    const handleOnSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const newUser = Object.fromEntries(formData.entries());
-        console.log(newUser);
-    }
 
     return (
 
@@ -34,29 +27,29 @@ export function BookAppointment({ docName, availability }) {
                     </Modal.Header>
                     <Modal.Body className="p-6">
                         <Surface variant="default">
-                            <form className="flex flex-col gap-4" onSubmit={handleOnSubmit}>
+                            <form className="flex flex-col gap-4" action={formAction}>
 
-                                <TextField className="w-full" name="docName" type="text" variant="secondary">
+                                <TextField className="w-full" type="text" variant="secondary">
                                     <Label>Doctors Name</Label>
-                                    <Input readOnly value={docName} />
+                                    <Input name="docName" readOnly value={docName} />
                                 </TextField>
 
-                                <TextField className="w-full" name="name" type="text" variant="secondary">
+                                <TextField className="w-full" type="text" variant="secondary">
                                     <Label>Name</Label>
-                                    <Input placeholder="Enter your name" required />
+                                    <Input name="name" placeholder="Enter your name" required />
                                 </TextField>
 
-                                <TextField className="w-full" name="email" type="email" variant="secondary">
+                                <TextField className="w-full" type="email" variant="secondary">
                                     <Label>Email</Label>
-                                    <Input placeholder="Enter your email" required />
+                                    <Input name="email" placeholder="Enter your email" required />
                                 </TextField>
 
-                                <TextField className="w-full" name="phone" type="tel" variant="secondary">
+                                <TextField className="w-full" type="tel" variant="secondary">
                                     <Label>Phone</Label>
-                                    <Input placeholder="Enter your phone number" required />
+                                    <Input name="phone" placeholder="Enter your phone number" required />
                                 </TextField>
 
-                                <TextField className="w-full" name="gender" variant="secondary">
+                                <TextField className="w-full" variant="secondary">
                                     <Label>Gender</Label>
                                     <div className="flex gap-3">
                                         <Label>
@@ -70,9 +63,10 @@ export function BookAppointment({ docName, availability }) {
                                     </div>
                                 </TextField>
 
-                                <TextField className="w-full" name="date" variant="secondary">
+                                <TextField className="w-full" variant="secondary">
                                     <Label>Appointment Date</Label>
                                     <Input
+                                        name="date"
                                         type="date"
                                         min={todayStr}
                                         value={bookingDate}
@@ -81,7 +75,7 @@ export function BookAppointment({ docName, availability }) {
                                     />
                                 </TextField>
 
-                                <TextField className="w-full" name="timeSlot" variant="secondary">
+                                <TextField className="w-full" variant="secondary">
                                     <Label>Select Available Shift</Label>
                                     <div className="flex flex-col gap-2 pt-1">
                                         {availability.map((slot, index) => (
@@ -114,7 +108,7 @@ export function BookAppointment({ docName, availability }) {
                                     <Button slot="close" variant="secondary">
                                         Cancel
                                     </Button>
-                                    <Button type="submit">Confirm Appointment</Button>
+                                    <Button type="submit" slot="close">Confirm Appointment</Button>
                                 </Modal.Footer>
                             </form>
                         </Surface>
