@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa6";
 
 const AppointmentsPage = async () => {
-    let docs = await getDocData();
+    const docs = await getDocData();
 
     return (
         <main className="min-h-screen bg-base-200/40 py-12 md:py-16">

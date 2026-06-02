@@ -1,9 +1,16 @@
+'use client'
+
 import Link from "next/link";
 import { FaStethoscope } from "react-icons/fa6";
 import NavLinks from "./NavLinks";
 import { BiMenu } from "react-icons/bi";
+import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
+    const { data: session, isPending } = authClient.useSession();
+    const user = session?.user;
+    const id = session?.user.id;
 
     return (
         <header className="sticky top-0 z-50 w-full bg-base-100/90 backdrop-blur-md border-b border-base-200 shadow-sm">
@@ -39,13 +46,26 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end gap-3">
-
-                    <Link href="/login" className="btn btn-ghost btn-sm sm:btn-md font-semibold hidden sm:inline-flex">
-                        Log in
-                    </Link>
-                    <Link href="/register" className="btn btn-primary btn-sm sm:btn-md font-semibold shadow-sm">
-                        Register
-                    </Link>
+                    {isPending ? <div className="navbar-end"><span className="loading loading-spinner text-primary"></span></div> :
+                        user ?
+                            <>
+                                <div className="avatar">
+                                    <div className="w-10 h-10 rounded-full relative">
+                                        <Image priority={true} src={user.image} alt="user" fill />
+                                    </div>
+                                </div>
+                                <Link href={'/'}><div onClick={async () => await authClient.signOut()} className="font-semibold hover:text-red-500 active:scale-95">Log out</div></Link>
+                            </>
+                            :
+                            <>
+                                <Link href="/login" className="btn btn-ghost btn-sm sm:btn-md font-semibold hidden sm:inline-flex">
+                                    Log in
+                                </Link>
+                                <Link href="/register" className="btn btn-primary btn-sm sm:btn-md font-semibold shadow-sm">
+                                    Register
+                                </Link>
+                            </>
+                    }
 
                 </div>
 

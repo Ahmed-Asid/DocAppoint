@@ -11,7 +11,6 @@ export function BookAppointment({ docName, availability, formAction }) {
     const [bookingDate, setBookingDate] = useState("");
     const [selectedSlot, setSelectedSlot] = useState("");
 
-
     return (
 
         <Modal.Backdrop>

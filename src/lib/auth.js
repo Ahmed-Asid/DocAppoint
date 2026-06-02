@@ -10,6 +10,10 @@ export const auth = betterAuth({
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
+  
+  logger: {
+    level: "debug",
+  },
 
   emailAndPassword: { 
     enabled: true,

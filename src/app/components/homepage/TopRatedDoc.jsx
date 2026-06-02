@@ -66,7 +66,7 @@ const TopRatedDoc = async () => {
                                 {/* Dynamic Action Button without boundary crossing errors */}
                                 <div className="mt-auto pt-4 border-t border-base-200">
                                     <Link
-                                        href={`/doctors/${doc.id}`}
+                                        href={`/appointments/${doc.id}`}
                                         className="btn btn-primary btn-flat w-full font-semibold normal-case rounded-xl transition-all flex items-center justify-center bg-primary/10 text-primary hover:bg-primary hover:text-primary-content py-3"
                                     >
                                         View Details

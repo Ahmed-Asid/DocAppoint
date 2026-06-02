@@ -123,7 +123,7 @@ const SignIn = () => {
 
                 <p className="text-center mt-8 text-slate-600">
                     Don&apos;t have an account?
-                    <a href="/sign-up" className="text-[#10b981] font-bold hover:underline underline-offset-4 decoration-2"> Create Account</a>
+                    <a href="/register" className="text-[#10b981] font-bold hover:underline underline-offset-4 decoration-2"> Create Account</a>
                 </p>
             </div>
         </div>

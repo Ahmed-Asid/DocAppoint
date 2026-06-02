@@ -18,7 +18,6 @@ const DoctorDetailsPage = async ({ params }) => {
     const { docId } = await params;
     const doc = await getDocByID(docId);
 
-
     return (
         <section className="min-h-screen bg-base-200/40 py-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
