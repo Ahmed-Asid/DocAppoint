@@ -43,3 +43,19 @@ export const deleteAppointment = async(id) => {
     }
     return data;
 }
+
+export const updateAppointment = async(formdata, id) => {
+    'use server'
+    const res = await fetch(`http://localhost:8000/api/appointments/${id}`, {
+        method: 'PATCH',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(formdata)
+        });
+    const data = await res.json();
+    console.log(data)
+    revalidatePath('/dashboard')
+    return data;
+}
+

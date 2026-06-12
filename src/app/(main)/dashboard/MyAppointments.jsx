@@ -2,7 +2,7 @@ import { FaCalendarTimes } from "react-icons/fa";
 import { getAppointments } from "@/data/data";
 import { Chip } from "@heroui/react";
 import AppointmentUi from "./AppointmentUi";
-import { deleteAppointment } from "@/lib/actions";
+import { deleteAppointment, updateAppointment } from "@/lib/actions";
 
 const MyAppointments = async () => {
 
@@ -34,7 +34,7 @@ const MyAppointments = async () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {appointments.map((appointment) => <AppointmentUi key={appointment._id} appointment={appointment} deleteAppointment={deleteAppointment} />)}
+                    {appointments.map((appointment) => <AppointmentUi key={appointment._id} appointment={appointment} deleteAppointment={deleteAppointment} updateAppointment={updateAppointment} />)}
                 </div>
 
                 {appointments.length === 0 && (

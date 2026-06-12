@@ -1,10 +1,11 @@
 'use client'
 
 import { FiMail } from "react-icons/fi";
-import { Button, Card, Chip } from "@heroui/react";
+import { Button, Card, Chip, Modal } from "@heroui/react";
 import { FaCalendarCheck, FaClock, FaPenToSquare, FaPhone, FaTrashCan, FaUser, FaUserDoctor } from "react-icons/fa6";
+import { UpdateAppointment } from "./UpdateAppointmentModal";
 
-const AppointmentUi = ({ appointment, deleteAppointment }) => {
+const AppointmentUi = ({ appointment, deleteAppointment, updateAppointment }) => {
 
     const handleDelete = async (id) => {
         await deleteAppointment(id)
@@ -62,15 +63,18 @@ const AppointmentUi = ({ appointment, deleteAppointment }) => {
                 </div>
 
                 <div className="mt-auto pt-4 border-t border-base-200 flex gap-3">
-                    <Button
-                        color="primary"
-                        variant="flat"
-                        radius="xl"
-                        className="w-full font-bold shadow-sm hover:shadow-md transition-all text-sm flex-1"
-                        startContent={<FaPenToSquare className="text-xs" />}
-                    >
-                        Update
-                    </Button>
+                    <Modal>
+                        <Button
+                            color="primary"
+                            variant="secondary"
+                            radius="xl"
+                            className="w-full font-bold shadow-sm hover:shadow-md transition-all text-sm flex-1"
+                            startContent={<FaPenToSquare className="text-xs" />}
+                        >
+                            Update
+                        </Button>
+                        <UpdateAppointment appointment={appointment} updateAppointment={updateAppointment} ></UpdateAppointment>
+                    </Modal>
                     <Button
                         onClick={() => handleDelete(appointment._id)}
                         color="danger"
