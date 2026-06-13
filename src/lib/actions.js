@@ -59,3 +59,19 @@ export const updateAppointment = async(formdata, id) => {
     return data;
 }
 
+
+export const updateProfile = async(updatedData, id) => {
+    'use server'
+
+    const res = await fetch(`http://localhost:8000/api/users/${id}`, {
+        method: 'PATCH',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        });
+    const data = await res.json();
+    console.log(data)
+    return data;
+}
+

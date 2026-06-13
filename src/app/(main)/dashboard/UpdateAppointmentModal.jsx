@@ -5,10 +5,10 @@ import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 
 export function UpdateAppointment({ appointment, updateAppointment }) {
 
-    const onSubmit = (formData) => {
+    const onSubmit = async (formData) => {
         const formdata = Object.fromEntries(formData.entries());
         console.log(formData)
-        updateAppointment(formdata, appointment._id)
+        await updateAppointment(formdata, appointment._id)
     }
 
     return (
