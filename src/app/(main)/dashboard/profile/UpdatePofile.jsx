@@ -2,15 +2,20 @@
 
 import { Stethoscope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import { toast } from "react-toastify";
 
-export function UpdateProfile({ user, updateProfile, refetch }) {
+export function UpdateProfile({ user, updateProfile }) {
 
     const formAction = async (formData) => {
 
         const updatedData = Object.fromEntries(formData.entries());
-        console.log("hello", updatedData)
-        await updateProfile(updatedData, user.id)
-        await refetch();
+        // console.log("hello", updatedData)
+        const result = await updateProfile(updatedData, user._id);
+        if (result.success) {
+            toast.success(result.message);
+        } else {
+            toast.error(result.message);
+        }
 
     }
 

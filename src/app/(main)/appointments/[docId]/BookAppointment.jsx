@@ -3,13 +3,24 @@
 import { Stethoscope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-export function BookAppointment({ docName, availability, formAction }) {
+export function BookAppointment({ docName, availability, bookAppointment }) {
 
     const todayStr = new Date().toISOString().split("T")[0];
 
     const [bookingDate, setBookingDate] = useState("");
     const [selectedSlot, setSelectedSlot] = useState("");
+
+    const formAction = async (formData) => {
+        const result = await bookAppointment(formData);
+
+        if (result.success) {
+            toast.success(result.message);
+        } else {
+            toast.error(result.message);
+        }
+    };
 
     return (
 

@@ -2,13 +2,19 @@
 
 import { Stethoscope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import { toast } from "react-toastify";
 
 export function UpdateAppointment({ appointment, updateAppointment }) {
 
     const onSubmit = async (formData) => {
         const formdata = Object.fromEntries(formData.entries());
         console.log(formData)
-        await updateAppointment(formdata, appointment._id)
+        const result = await updateAppointment(formdata, appointment._id)
+        if (result.success) {
+            toast.success(result.message);
+        } else {
+            toast.error(result.message);
+        }
     }
 
     return (

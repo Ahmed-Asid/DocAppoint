@@ -1,28 +1,22 @@
 'use client'
 
-import { Card, Button, Modal, Surface, TextField, Label, Input } from "@heroui/react";
+import { Card, Button, Modal } from "@heroui/react";
 import DashBoardTabs from "../DashboardTabs";
-import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import { FaUser } from "react-icons/fa6";
 import { FiMail } from "react-icons/fi";
 import { FaEdit } from "react-icons/fa";
 import { UpdateProfile } from "./UpdatePofile";
 
-const ProfilePage = ({ updateProfile }) => {
-
-    const { data: session, isPending, refetch } = authClient.useSession();
-    const user = session?.user;
-    console.log("user", user)
-
-
+const ProfilePage = ({ updateProfile, user }) => {
+    // console.log(user)
     return (
         <div className="w-full">
             <DashBoardTabs />
             <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
                 <Card className="max-w-xl mx-auto">
                     {
-                        isPending ? <div>Loading...</div> :
+                        !user ? <div className="flex justify-center mt-20"><span className="loading loading-dots loading-xl"></span></div> :
                             <div>
                                 <h2 className="text-2xl font-medium text-center">User Information</h2>
                                 <hr className="my-5" />
@@ -71,7 +65,7 @@ const ProfilePage = ({ updateProfile }) => {
                                         <div className="flex justify-end mt-8">
                                             <Modal>
                                                 <Button variant="secondary" type="submit" slot="close" className="flex gap-2"><FaEdit /> Update Profile</Button>
-                                                <UpdateProfile user={user} updateProfile={updateProfile} refetch={refetch} />
+                                                <UpdateProfile user={user} updateProfile={updateProfile} />
                                             </Modal>
                                         </div>
                                     </div>

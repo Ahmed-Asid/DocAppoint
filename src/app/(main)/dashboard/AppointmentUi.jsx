@@ -4,11 +4,17 @@ import { FiMail } from "react-icons/fi";
 import { Button, Card, Chip, Modal } from "@heroui/react";
 import { FaCalendarCheck, FaClock, FaPenToSquare, FaPhone, FaTrashCan, FaUser, FaUserDoctor } from "react-icons/fa6";
 import { UpdateAppointment } from "./UpdateAppointmentModal";
+import { toast } from "react-toastify";
 
 const AppointmentUi = ({ appointment, deleteAppointment, updateAppointment }) => {
 
     const handleDelete = async (id) => {
-        await deleteAppointment(id)
+        const result = await deleteAppointment(id)
+        if (result.success) {
+            toast.success(result.message);
+        } else {
+            toast.error(result.message);
+        }
     }
 
     return (

@@ -7,7 +7,7 @@ import { deleteAppointment, updateAppointment } from "@/lib/actions";
 const MyAppointments = async () => {
 
     const appointments = await getAppointments();
-    console.log("appointments", appointments)
+    // console.log("appointments", appointments)
 
     return (
         <div className="w-full mt-10">
@@ -34,7 +34,7 @@ const MyAppointments = async () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {appointments.map((appointment) => <AppointmentUi key={appointment._id} appointment={appointment} deleteAppointment={deleteAppointment} updateAppointment={updateAppointment} />)}
+                    {appointments?.map((appointment) => <AppointmentUi key={appointment._id} appointment={appointment} deleteAppointment={deleteAppointment} updateAppointment={updateAppointment} />)}
                 </div>
 
                 {appointments.length === 0 && (

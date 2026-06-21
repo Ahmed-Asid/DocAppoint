@@ -75,7 +75,7 @@ const DoctorDetailsPage = async ({ params }) => {
                             <div className="mx-auto md:mx-0">
                                 <Modal>
                                     <Button variant="secondary">Book Appointment</Button>
-                                    <BookAppointment docName={doc.name} availability={doc.availability} formAction={bookAppointment}></BookAppointment>
+                                    <BookAppointment docName={doc.name} availability={doc.availability} bookAppointment={bookAppointment}></BookAppointment>
                                 </Modal>
                             </div>
 

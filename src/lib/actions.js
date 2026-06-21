@@ -5,73 +5,172 @@ import { headers } from 'next/headers';
 export const bookAppointment = async(formData) => {
     'use server'
 
-    const newAppointment = Object.fromEntries(formData.entries());
+    try {
+        const newAppointment = Object.fromEntries(formData.entries());
 
-    const session = await auth.api.getSession({
+        const session = await auth.api.getSession({
         headers: await headers()
-    });
+        });
 
-    if (!session) {
+        const {token} = await auth.api.getToken({
+            headers: await headers()
+        })
+
+        if (!session) {
         throw new Error("Unauthorized");
-    }
+        }
 
-    const appointmentData = {
+        const appointmentData = {
         ...newAppointment,
         userId : session.user.id
-    }
+        }
 
-    const res = await fetch('http://localhost:8000/api/appointments', {
+        const res = await fetch('http://localhost:8000/api/appointments', {
             method: 'POST',
             headers: {
-                'Content-type' : 'application/json'
+                'Content-type' : 'application/json',
+                authorization: `${token}`
             },
             body: JSON.stringify(appointmentData)
         });
-    const data = await res.json();
-    console.log(data)
-    return data;
+        const data = await res.json();
+        // console.log(data)
+        if (!res.ok) {
+            return {
+                success: false,
+                message: data.message || "Booking failed"
+            };
+        }
+
+        return {
+            success: true,
+            message: "Appointment booked successfully"
+        };
+
+        } catch (error) {
+        return {
+            success: false,
+            message: error.message || "Something went wrong"
+        };
+    }
 }
 
 export const deleteAppointment = async(id) => {
     'use server'
+
+    try{
+
+    const {token} = await auth.api.getToken({
+            headers: await headers()
+        })
     const res = await fetch(`http://localhost:8000/api/appointments/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            authorization: `${token}`
+        }
     })
     const data = await res.json();
+    
+    if (!res.ok) {
+            return {
+                success: false,
+                message: data.message || "Update failed"
+            };
+        }
     if(data.deletedCount > 0){
         revalidatePath('/dashboard')
     }
-    return data;
+        return {
+            data: data,
+            success: true,
+            message: "Appointment deleted successfully"
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: error.message || "Something went wrong"
+        };
+    }
 }
 
 export const updateAppointment = async(formdata, id) => {
     'use server'
+
+    try {
+    const {token} = await auth.api.getToken({
+            headers: await headers()
+        })
+
     const res = await fetch(`http://localhost:8000/api/appointments/${id}`, {
         method: 'PATCH',
             headers: {
-                'Content-type' : 'application/json'
+                'Content-type' : 'application/json',
+                authorization: `${token}`
             },
             body: JSON.stringify(formdata)
         });
     const data = await res.json();
-    console.log(data)
-    revalidatePath('/dashboard')
-    return data;
+    // console.log(data)
+
+    if (!res.ok) {
+            return {
+                success: false,
+                message: data.message || "Update failed"
+            };
+        }
+
+        revalidatePath('/dashboard')
+        return {
+            data: data,
+            success: true,
+            message: "Appointment updated successfully"
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: error.message || "Something went wrong"
+        };
+    }
 }
 
 
 export const updateProfile = async(updatedData, id) => {
     'use server'
 
-    const res = await fetch(`http://localhost:8000/api/users/${id}`, {
+    try {
+        const {token} = await auth.api.getToken({
+            headers: await headers()
+        })
+        
+        const res = await fetch(`http://localhost:8000/api/users/${id}`, {
+        cache: 'no-store',
         method: 'PATCH',
             headers: {
-                'Content-type' : 'application/json'
+                'Content-type' : 'application/json',
+                authorization: `${token}`
             },
             body: JSON.stringify(updatedData)
         });
-    const data = await res.json();
-    console.log(data)
-    return data;
+        const data = await res.json();
+        // console.log(data)
+        if (!res.ok) {
+            return {
+                success: false,
+                message: data.message || "Update failed"
+            };
+        }
+
+        revalidatePath('/dashboard/profile')
+        return {
+            data: data,
+            success: true,
+            message: "Profile updated successfully"
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: error.message || "Something went wrong"
+        };
+    }
 }
 
