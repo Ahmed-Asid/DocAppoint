@@ -43,14 +43,14 @@ const AppointmentsPage = async () => {
 
                             <Card.Content className="p-0 flex flex-col h-full">
 
-                                <div className="h-56 w-full relative bg-base-300">
+                                <div className="relative w-full h-72 md:h-56 lg:h-64">
                                     <Image
                                         src={doc.image}
                                         alt={doc.name}
                                         fill
-                                        sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                                        sizes="(max-width: 480px) 100vw, (max-width: 480px) 50vw, 33vw"
                                         className="object-cover object-top"
-                                        priority={true}
+                                        priority
                                     />
 
                                     <div className="absolute top-4 right-4 bg-base-100/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
