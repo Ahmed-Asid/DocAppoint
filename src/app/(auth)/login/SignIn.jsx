@@ -44,6 +44,7 @@ const SignIn = () => {
         const data = await authClient.signIn.social({
             provider: "google",
         });
+        console.log(process.env.BETTER_AUTH_URL)
     };
 
     return (
@@ -65,7 +66,7 @@ const SignIn = () => {
                     Welcome Back. Please choose a method to continue.
                 </div>
 
-                <button onClick={googleSignIn} className="flex items-center justify-center gap-3 w-full py-3.5 border-2 border-slate-100 rounded-2xl hover:bg-slate-50 transition-all font-semibold text-slate-700 group">
+                <button onClick={googleSignIn} className="flex items-center justify-center gap-3 w-full py-3.5 border-2 border-slate-100 rounded-2xl hover:bg-slate-50 active:scale-90 transition-all font-semibold text-slate-700 group">
                     <FaChrome size={20} className="text-[#2563eb] group-hover:scale-110 transition-transform" />
                     Sign in with Google
                 </button>

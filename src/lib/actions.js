@@ -25,7 +25,7 @@ export const bookAppointment = async(formData) => {
         userId : session.user.id
         }
 
-        const res = await fetch('http://localhost:8000/api/appointments', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/appointments`, {
             method: 'POST',
             headers: {
                 'Content-type' : 'application/json',
@@ -63,7 +63,7 @@ export const deleteAppointment = async(id) => {
     const {token} = await auth.api.getToken({
             headers: await headers()
         })
-    const res = await fetch(`http://localhost:8000/api/appointments/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/appointments/${id}`, {
         method: 'DELETE',
         headers: {
             authorization: `${token}`
@@ -101,7 +101,7 @@ export const updateAppointment = async(formdata, id) => {
             headers: await headers()
         })
 
-    const res = await fetch(`http://localhost:8000/api/appointments/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/appointments/${id}`, {
         method: 'PATCH',
             headers: {
                 'Content-type' : 'application/json',
@@ -142,7 +142,7 @@ export const updateProfile = async(updatedData, id) => {
             headers: await headers()
         })
         
-        const res = await fetch(`http://localhost:8000/api/users/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${id}`, {
         cache: 'no-store',
         method: 'PATCH',
             headers: {

@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import SignIn from './SignIn';
 
 export const metadata = {
-    title: 'SkillSphere - Sign in',
+    title: 'Sign in',
     description: 'Login with your account',
 };
 

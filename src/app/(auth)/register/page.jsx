@@ -2,7 +2,7 @@
 import SignUp from './SignUp';
 
 export const metadata = {
-    title: 'SkillSphere - Sign Up',
+    title: 'Sign Up',
     description: 'Create an account',
 };
 

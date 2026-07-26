@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Hello Node",
-  description: "New project to learn node",
+  title: "Doc-Appoint",
+  description: "A Project To Doctor Appointment Easy And Dynamic",
 };
 
 export default function RootLayout({ children }) {

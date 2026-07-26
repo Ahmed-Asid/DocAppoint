@@ -10,6 +10,11 @@ import {
     FaStar
 } from "react-icons/fa6";
 
+export const metadata = {
+    title: 'Appointments',
+    description: 'Available doctors for appointment',
+};
+
 const AppointmentsPage = async () => {
     const docs = await getDocData();
 
